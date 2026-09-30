@@ -1,23 +1,181 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mistr osudu — Výklad tří cest</title>
-<meta name="description" content="Jedna otázka. Jeden symbol. Tři cesty.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mistr osudu</title>
 
 <style>
-:root{--bg:#090711;--card:#141020;--ink:#f6f0df;--muted:#b8afc8;--gold:#d7b56d;--line:#30283f}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(circle at 50% -10%,#2b1c42 0,#0d0916 38%,#07060c 75%);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
-.wrap{max-width:760px;margin:auto;padding:28px 18px 70px}
-.brand{text-align:center;letter-spacing:.18em;color:var(--gold);font-weight:700}
-.hero{text-align:center;padding:44px 0 26px}
-.hero h1{font-family:Georgia,serif;font-size:clamp(42px,10vw,72px);margin:8px 0}
-.hero p{color:var(--muted);font-size:19px}
-.card{background:rgba(20,16,32,.9);border:1px solid var(--line);border-radius:22px;padding:24px;margin-top:20px;box-shadow:0 20px 70px #0007}
-.step{display:none}
-.step.active{display:block}
-h2{font-family:Georgia,serif;font-size:30px;margin-top:0}
-label{display:block;margin:15px 0 8px;color:var(--muted)}
-textarea{width:100%;background:#0b
+body{
+margin:0;
+background:#090711;
+color:#f6f0df;
+font-family:Arial,sans-serif;
+text-align:center;
+}
+main{
+max-width:650px;
+margin:auto;
+padding:35px 20px;
+}
+h1{
+font-family:Georgia,serif;
+font-size:48px;
+color:#d7b56d;
+}
+h2{font-family:Georgia,serif}
+p{font-size:18px;line-height:1.6}
+.box{
+background:#141020;
+padding:25px;
+border-radius:20px;
+margin-top:25px;
+}
+textarea{
+width:90%;
+min-height:100px;
+padding:15px;
+font-size:16px;
+border-radius:10px;
+}
+button,.pay{
+display:block;
+width:90%;
+margin:20px auto;
+padding:17px;
+border:0;
+border-radius:12px;
+background:#d7b56d;
+color:#211608;
+font-size:17px;
+font-weight:bold;
+text-decoration:none;
+cursor:pointer;
+}
+#symbols,#result{display:none}
+.symbols{
+display:flex;
+gap:10px;
+justify-content:center;
+}
+.symbols button{
+width:30%;
+font-size:35px;
+}
+.price{
+font-size:38px;
+font-weight:bold;
+color:#d7b56d;
+}
+small{color:#aaa}
+</style>
+</head>
+
+<body>
+
+<main>
+
+<p>✦ MISTR OSUDU ✦</p>
+
+<h1>Jedna otázka.<br>Jeden symbol.<br>Tři cesty.</h1>
+
+<p>Bez fotografie. Bez data narození.<br>
+Stačí otázka, která se ti stále vrací.</p>
+
+<div class="box" id="question">
+
+<h2>Polož svou otázku</h2>
+
+<textarea id="q" placeholder="Napiš svou otázku..."></textarea>
+
+<button onclick="next()">POLOŽIT OTÁZKU →</button>
+
+</div>
+
+<div class="box" id="symbols">
+
+<h2>Vyber symbol</h2>
+
+<p>Vyber ten, který tě přitáhne jako první.</p>
+
+<div class="symbols">
+
+<button onclick="choose('NEBE')">☰</button>
+
+<button onclick="choose('VODA')">☵</button>
+
+<button onclick="choose('HROM')">☳</button>
+
+</div>
+
+</div>
+
+<div class="box" id="result">
+
+<h2 id="name"></h2>
+
+<p id="text"></p>
+
+<h2>Tvůj výklad má pokračování</h2>
+
+<p>
+🔒 Cesta I — současný směr<br>
+🔒 Cesta II — změna<br>
+🔒 Cesta III — skrytá možnost<br>
+🔒 Stín — co možná přehlížíš<br>
+🔒 Klíč — hlavní poselství
+</p>
+
+<div class="price">99 Kč</div>
+
+<a class="pay"
+href="https://buy.stripe.com/7sYcN53b2a3v0Og8Atcs800">
+ODEMKNOUT CELÝ VÝKLAD ZA 99 KČ →
+</a>
+
+</div>
+
+<br>
+
+<small>
+Symbolický výklad je určen k osobní reflexi a zábavě.
+</small>
+
+</main>
+
+<script>
+
+function next(){
+if(document.getElementById("q").value.trim()==""){
+alert("Nejdříve napiš otázku.");
+return;
+}
+
+document.getElementById("question").style.display="none";
+document.getElementById("symbols").style.display="block";
+}
+
+function choose(x){
+
+document.getElementById("symbols").style.display="none";
+document.getElementById("result").style.display="block";
+document.getElementById("name").innerText=x;
+
+let t="";
+
+if(x=="NEBE")
+t="Nebe ukazuje na sílu, směr a možnost převzít větší část svého rozhodnutí do vlastních rukou.";
+
+if(x=="VODA")
+t="Voda ukazuje, že cesta nemusí vést přímo. Někdy se řešení objeví tam, kde ho nejméně čekáš.";
+
+if(x=="HROM")
+t="Hrom přichází jako impuls ke změně. Může naznačovat, že nastal čas udělat první skutečný krok.";
+
+document.getElementById("text").innerText=t;
+}
+
+</script>
+
+</body>
+</html>
